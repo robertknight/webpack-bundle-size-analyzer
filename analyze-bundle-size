@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-require('./build/index');
+require('./build/cli');
 
