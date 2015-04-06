@@ -6,5 +6,4 @@ deploy:
 - provider: npm
   email: robertknight@gmail.com
   api_key:
-    secure: RhRzH7umr4QyFjScdoR1nsWn/BHjQGrqwpFiavQzMgd1cEEnuWtTju8puGFct8++SJXH3bfcLp9kqtg3S2BB2qQM8ZqHlU1WGh8rKvgaFtmZCMdITPWqGmL/AuKQi+JL272jnReqwxi/leTNI1OQXL3TJXRv33JHDJphKJ+vGtE=
-
+    secure: e5FFL8+lzUkrNnwjdiNAkzf/I8PIof6K9oPHljHVkqFtERFU80ffQqQvB7UK4Mo2L58HJAg9zyvaLqqHN049AFQxolLo6Z3Bx2n8iGuEDnG00FpBhA1ArbRhNWQN/7EH+Lo1xeABhTDb6ub11mxl10pxcPbJYuwCmkQ9jPYYRPQ=
