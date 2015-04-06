@@ -1,0 +1,10 @@
+language: node_js
+sudo: false
+node_js:
+- 'iojs'
+deploy:
+- provider: npm
+  email: robertknight@gmail.com
+  api_key:
+    secure: RhRzH7umr4QyFjScdoR1nsWn/BHjQGrqwpFiavQzMgd1cEEnuWtTju8puGFct8++SJXH3bfcLp9kqtg3S2BB2qQM8ZqHlU1WGh8rKvgaFtmZCMdITPWqGmL/AuKQi+JL272jnReqwxi/leTNI1OQXL3TJXRv33JHDJphKJ+vGtE=
+

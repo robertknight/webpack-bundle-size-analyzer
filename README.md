@@ -1,6 +1,8 @@
 Webpack Bundle Size Analyzer
 ============================
 
+[![Build Status](https://travis-ci.org/robertknight/webpack-bundle-size-analyzer.png?branch=master)](https://travis-ci.org/robertknight/webpack-bundle-size-analyzer)
+
 A small utility to help you find out what is contributing
 to the size of your [Webpack](http://webpack.github.io/) bundles.
 
