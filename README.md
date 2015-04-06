@@ -54,3 +54,21 @@ q: 58.84 kB (5.07%)
 <self>: 195.57 kB (16.9%)
 ````
 
+### Important Note About Minification
+
+The statistics reported for modules in Webpack's JSON output do
+take into account transformations resulting from loaders, but
+not plugins which operate on the whole generated bundle.
+
+The [recommended approach](http://webpack.github.io/docs/optimization.html)
+to minifying JavaScript in Webpack bundles is to use the UglifyJS plugin,
+which operates on the whole bundle. Consequently the stats shown by analyze-bundle-size
+will report sizes _before_ minification. This should still give a pretty good idea of what
+contributes to your bundle size but some libraries will compress better than others,
+so they can be misleading.
+
+A workaround is to generate a Webpack build using [the UglifyJS loader](https://www.npmjs.com/package/uglify-loader)
+instead and use the JSON output from that. Since the loader runs on individual files before they are bundled,
+the accounting will be correct.
+
+

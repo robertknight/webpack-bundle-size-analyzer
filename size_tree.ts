@@ -7,7 +7,7 @@ import webpack_stats = require('./webpack_stats');
 function modulePath(identifier: string) {
 	// the format of module paths is
 	//   '(<loader expression>!)?/path/to/module.js'
-	let loaderRegex = /.*![^!]+/;
+	let loaderRegex = /.*!/;
 	return identifier.replace(loaderRegex, '');
 }
 
