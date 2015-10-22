@@ -106,14 +106,14 @@ export function dependencySizeTree(stats: webpack_stats.WebpackJsonOutput) {
 
 		let parent = statsTree;
 		parent.size += mod.size;
-		packages.forEach(package => {
-			let existing = parent.children.filter(child => child.packageName === package);
+		packages.forEach(pkg => {
+			let existing = parent.children.filter(child => child.packageName === pkg);
 			if (existing.length > 0) {
 				existing[0].size += mod.size;
 				parent = existing[0];
 			} else {
 				let newChild: StatsNode = {
-					packageName: package,
+					packageName: pkg,
 					size: mod.size,
 					children: []
 				};

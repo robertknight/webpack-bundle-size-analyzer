@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": false,
+        "outDir": "build",
+        "rootDir": ".",
+        "sourceMap": false
+    },
+	"files": [
+		"cli.ts",
+		"size_tree.ts",
+		"webpack_stats.ts"
+	],
+    "exclude": [
+        "node_modules"
+    ]
+}
