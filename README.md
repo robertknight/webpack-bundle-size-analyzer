@@ -20,8 +20,7 @@ see their [optimization guide](http://webpack.github.io/docs/optimization.html)
 
 ````
 npm install -g webpack-bundle-size-analyzer
-webpack --json > bundle-stats.json
-analyze-bundle-size bundle-stats.json
+webpack --json | analyze-bundle-size
 ````
 
 When run on [react-testing](https://github.com/robertknight/react-testing) for example,

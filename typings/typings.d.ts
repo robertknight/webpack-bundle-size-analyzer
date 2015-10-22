@@ -24,3 +24,12 @@ declare module 'filesize' {
 
 	export = filesize;
 }
+
+declare module NodeJS {
+	interface ReadableStream {
+		// additional property for process.{stdin, stdout, stderr}
+		isTTY?: boolean;
+	}
+}
+
+
