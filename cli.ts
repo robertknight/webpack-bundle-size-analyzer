@@ -12,7 +12,7 @@ function printStats(json) {
 	size_tree.printDependencySizeTree(depTree);
 }
 
-commander.version('0.1.0')
+commander.version('1.1.0')
          .usage('[options] [Webpack JSON output]')
          .description(
  `Analyzes the JSON output from 'webpack --json'

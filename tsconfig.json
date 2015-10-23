@@ -10,7 +10,8 @@
 	"files": [
 		"cli.ts",
 		"size_tree.ts",
-		"webpack_stats.ts"
+		"webpack_stats.ts",
+		"tests/size_tree_test.ts"
 	],
     "exclude": [
         "node_modules"
