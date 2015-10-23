@@ -1,6 +1,7 @@
 /// <reference path="typings/typings.d.ts" />
 
 import filesize = require('filesize');
+import path = require('path');
 
 import webpack_stats = require('./webpack_stats');
 
@@ -91,12 +92,12 @@ export function dependencySizeTree(stats: webpack_stats.WebpackJsonOutput) {
 		//
 		// root/node_modules/parent/node_modules/child/file/path.js =>
 		//  ['root', 'parent', 'child', 'file/path.js'
-
-		let packages = mod.path.split(/\/node_modules\//);
+		let nodeModulesRegex = new RegExp('\\' + path.sep + 'node_modules' + '\\' + path.sep);
+		let packages = mod.path.split(nodeModulesRegex);
 		let filename = '';
 		if (packages.length > 1) {
 			let lastSegment = packages.pop();
-			let lastPackageName = lastSegment.slice(0, lastSegment.search(/\/|$/));
+			let lastPackageName = lastSegment.slice(0, lastSegment.search(new RegExp('\\' + path.sep + '|$')));
 			packages.push(lastPackageName);
 			filename = lastSegment.slice(lastPackageName.length + 1);
 		} else {
