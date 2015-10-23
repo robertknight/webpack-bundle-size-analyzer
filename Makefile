@@ -9,7 +9,7 @@ $(typings_file): tsd.json
 	$(NODE_BIN)/tsd rebundle
 
 build/cli.js: $(typings_file) $(wildcard *.ts) $(wildcard tests/*.ts)
-	tsc
+	$(NODE_BIN)/tsc
 
 test: build/cli.js
 	$(NODE_BIN)/mocha build/tests/
