@@ -12,7 +12,7 @@ build/cli.js: $(typings_file) $(wildcard *.ts) $(wildcard tests/*.ts)
 	$(NODE_BIN)/tsc
 
 test: build/cli.js
-	$(NODE_BIN)/mocha build/tests/
+	$(NODE_BIN)/mocha tests/
 
 clean:
 	rm -rf build
