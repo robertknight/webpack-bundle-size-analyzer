@@ -29,7 +29,7 @@ style-loader: 717 B (0.379%)
 });
 
 describe('dependencySizeTree()', () => {
-	it('should produce correct results where loaders are used', () => {
+	function getWebpackOutput(): webpack_stats.WebpackJsonOutput {
 		let webpackOutput: webpack_stats.WebpackJsonOutput = {
 			version: '1.2.3',
 			hash: 'unused',
@@ -44,6 +44,10 @@ describe('dependencySizeTree()', () => {
 				name: './foo.js'
 			}]
 		};
+		return webpackOutput;
+	}
+	it('should produce correct results where loaders are used', () => {
+		let webpackOutput = getWebpackOutput();
 		const depsTree = size_tree.dependencySizeTree(webpackOutput);
 		expect(depsTree).to.deep.equal({
 			packageName: '<root>',
@@ -55,4 +59,22 @@ describe('dependencySizeTree()', () => {
 			}]
 		});
 	});
+	it('should work with Windows style paths as well', () => {
+		let webpackOutput = getWebpackOutput();
+		webpackOutput.modules[0].identifier = '\\path\\to\\loader.js!\\path\\to\\project\\node_modules\\dep\\foo.js';
+		webpackOutput.modules[0].name = '.\\foo.js';
+		
+		const depsTree = size_tree.dependencySizeTree(webpackOutput);
+		expect(depsTree).to.deep.equal({
+			packageName: '<root>',
+			size: 1234,
+			children: [{
+				packageName: 'dep',
+				size: 1234,
+				children: []
+			}]
+		});
+	})
 });
+
+

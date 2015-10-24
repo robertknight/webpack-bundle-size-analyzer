@@ -12,6 +12,33 @@ function modulePath(identifier: string) {
 	return identifier.replace(loaderRegex, '');
 }
 
+function packageNames(identifier: string) {
+	// convert each module path into an array of package names, followed
+	// by the trailing path within the last module:
+	//
+	// root/node_modules/parent/node_modules/child/file/path.js =>
+	//  ['root', 'parent', 'child', 'file/path.js'
+	let packages = identifier.split('node_modules');
+	console.log(`Doing ${identifier}`);
+	console.log(packages);
+	packages = packages.map(p => {
+		return /^(\\|\/)?(.*?)(\\|\/)?$/.exec(p)[2]; //remove path seperators from beginning and end
+	})
+	console.log(packages);
+	let filename = '';
+	if (packages.length > 1) {
+		let lastSegment = packages.pop();
+		let lastPackageName = lastSegment.slice(0, lastSegment.search(new RegExp('(\\\\|\/)|$')));
+		packages.push(lastPackageName);
+		filename = lastSegment.slice(lastPackageName.length + 1);
+	} else {
+		filename = packages[0];
+	}
+	packages.shift();
+	
+	return packages;
+}
+
 /** A node in the package size tree
   */
 export interface StatsNode {
@@ -87,24 +114,7 @@ export function dependencySizeTree(stats: webpack_stats.WebpackJsonOutput) {
 	});
 
 	modules.forEach(mod => {
-		// convert each module path into an array of package names, followed
-		// by the trailing path within the last module:
-		//
-		// root/node_modules/parent/node_modules/child/file/path.js =>
-		//  ['root', 'parent', 'child', 'file/path.js'
-		let nodeModulesRegex = new RegExp('\\' + path.sep + 'node_modules' + '\\' + path.sep);
-		let packages = mod.path.split(nodeModulesRegex);
-		let filename = '';
-		if (packages.length > 1) {
-			let lastSegment = packages.pop();
-			let lastPackageName = lastSegment.slice(0, lastSegment.search(new RegExp('\\' + path.sep + '|$')));
-			packages.push(lastPackageName);
-			filename = lastSegment.slice(lastPackageName.length + 1);
-		} else {
-			filename = packages[0];
-		}
-		packages.shift();
-
+		let packages = packageNames(mod.path);
 		let parent = statsTree;
 		parent.size += mod.size;
 		packages.forEach(pkg => {
