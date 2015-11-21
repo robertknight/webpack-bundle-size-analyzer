@@ -2,6 +2,7 @@
 
 import {expect} from 'chai';
 import fs = require('fs');
+import path = require('path');
 
 import size_tree = require('../size_tree');
 import webpack_stats = require('../webpack_stats');
@@ -10,8 +11,16 @@ describe('printDependencySizeTree()', () => {
 	it('should print the size tree', () => {
 		let output = '';
 
-		const statsJsonStr = fs.readFileSync('tests/stats.json').toString();
+		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
 		const statsJson = <webpack_stats.WebpackJsonOutput>JSON.parse(statsJsonStr);
+
+		// convert paths in Json to WIN if necessary
+		if(path.sep !== '/') {
+			statsJson.modules.forEach(module => {
+				module.identifier = module.identifier.replace(/\//g, path.sep);
+			});
+		}
+
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		size_tree.printDependencySizeTree(depsTree, 0, line => output += '\n' + line);
 
@@ -39,9 +48,9 @@ describe('dependencySizeTree()', () => {
 			chunks: [],
 			modules: [{
 				id: 0,
-				identifier: '/path/to/loader.js!/path/to/project/node_modules/dep/foo.js',
+				identifier: path.join('/', 'to', 'loader.js!', 'path', 'to', 'project', 'node_modules', 'dep', 'foo.js'),
 				size: 1234,
-				name: './foo.js'
+				name: path.join('.', 'foo.js')
 			}]
 		};
 		const depsTree = size_tree.dependencySizeTree(webpackOutput);
