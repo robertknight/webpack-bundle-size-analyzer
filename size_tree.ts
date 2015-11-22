@@ -24,12 +24,22 @@ export interface StatsNode {
 	children: StatsNode[];
 }
 
+export interface RootStatsNode extends StatsNode {
+	bundleName?: string;
+}
+
 /** Walk a dependency size tree produced by dependencySizeTree() and output the
   * size contributed to the bundle by each package's own code plus those
   * of its dependencies.
   */
 export function printDependencySizeTree(node: StatsNode, depth: number = 0,
   outputFn: (str: string) => void = console.log) {
+
+	if (node.hasOwnProperty('bundleName')) {
+		let rootNode = node as RootStatsNode;
+		outputFn(`Bundle: ${rootNode.bundleName}`);
+	}
+
 	const childrenBySize = node.children.sort((a, b) => {
 		return b.size - a.size;
 	});
@@ -61,15 +71,16 @@ export function printDependencySizeTree(node: StatsNode, depth: number = 0,
 	outputFn(`${prefix}<self>: ${filesize(remainder)} (${percentage}%)`);
 }
 
-/** Takes the output of 'webpack --json', groups the require()'d modules
-  * by their associated NPM package and outputs a tree of package dependencies.
-  */
-export function dependencySizeTree(stats: webpack_stats.WebpackJsonOutput) {
-	let statsTree: StatsNode = {
+function bundleSizeTree(stats: webpack_stats.WebpackCompilation) {
+	let statsTree: RootStatsNode = {
 		packageName: '<root>',
 		size: 0,
 		children: []
 	};
+
+	if (stats.name) {
+		statsTree.bundleName = stats.name;
+	}
 
 	// extract source path for each module
 	let modules = stats.modules.map(mod => {
@@ -125,5 +136,19 @@ export function dependencySizeTree(stats: webpack_stats.WebpackJsonOutput) {
 	});
 
 	return statsTree;
+}
+
+/** Takes the output of 'webpack --json', and returns
+  * an array of trees of require()'d package names and sizes.
+  *
+  * There is one entry in the array for each bundle specified
+  * in the Webpack compilation.
+  */
+export function dependencySizeTree(stats: webpack_stats.WebpackStats) {
+	if (webpack_stats.isMultiCompilation(stats)) {
+		return stats.children.map(bundleSizeTree);
+	} else {
+		return [bundleSizeTree(stats)];
+	}
 }
 

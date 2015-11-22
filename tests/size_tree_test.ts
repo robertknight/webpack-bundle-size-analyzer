@@ -12,7 +12,7 @@ describe('printDependencySizeTree()', () => {
 		let output = '';
 
 		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
-		const statsJson = <webpack_stats.WebpackJsonOutput>JSON.parse(statsJsonStr);
+		const statsJson = <webpack_stats.WebpackCompilation>JSON.parse(statsJsonStr);
 
 		// convert paths in Json to WIN if necessary
 		if(path.sep !== '/') {
@@ -22,7 +22,8 @@ describe('printDependencySizeTree()', () => {
 		}
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
-		size_tree.printDependencySizeTree(depsTree, 0, line => output += '\n' + line);
+		expect(depsTree.length).to.equal(1);
+		size_tree.printDependencySizeTree(depsTree[0], 0, line => output += '\n' + line);
 
 		expect(output).to.equal(
 `
@@ -35,11 +36,26 @@ style-loader: 717 B (0.379%)
 <self>: 150.33 kB (81.3%)`
 );
 	});
+
+	it('should print the bundle name', () => {
+		let output = '';
+		let namedBundle: size_tree.RootStatsNode = {
+			bundleName: 'a-bundle',
+			packageName: '<self>',
+			size: 123,
+			children: [],
+		};
+		size_tree.printDependencySizeTree(namedBundle, 0, line => output += '\n' + line);
+		expect(output).to.equal(
+`
+Bundle: a-bundle
+<self>: 123 B (100%)`);
+	});
 });
 
 describe('dependencySizeTree()', () => {
 	it('should produce correct results where loaders are used', () => {
-		let webpackOutput: webpack_stats.WebpackJsonOutput = {
+		let webpackOutput: webpack_stats.WebpackCompilation = {
 			version: '1.2.3',
 			hash: 'unused',
 			time: 100,
@@ -51,10 +67,13 @@ describe('dependencySizeTree()', () => {
 				identifier: path.join('/', 'to', 'loader.js!', 'path', 'to', 'project', 'node_modules', 'dep', 'foo.js'),
 				size: 1234,
 				name: path.join('.', 'foo.js')
-			}]
+			}],
+			errors: [],
+			warnings: [],
 		};
 		const depsTree = size_tree.dependencySizeTree(webpackOutput);
-		expect(depsTree).to.deep.equal({
+		expect(depsTree.length).to.equal(1);
+		expect(depsTree[0]).to.deep.equal({
 			packageName: '<root>',
 			size: 1234,
 			children: [{
@@ -63,5 +82,13 @@ describe('dependencySizeTree()', () => {
 				children: []
 			}]
 		});
+	});
+
+	it('should return a tree for each bundle in the config', () => {
+		const statsJsonStr = fs.readFileSync(path.join('tests',
+		  'multiple-bundle-stats.json')).toString();
+		const statsJson = JSON.parse(statsJsonStr) as webpack_stats.WebpackStats;
+		const depsTree = size_tree.dependencySizeTree(statsJson);
+		expect(depsTree.length).to.equal(2);
 	});
 });

@@ -6,10 +6,10 @@ import fs = require('fs');
 import size_tree = require('./size_tree');
 import webpack_stats = require('./webpack_stats');
 
-function printStats(json) {
-	const bundleStats = JSON.parse(json) as webpack_stats.WebpackJsonOutput;
-	const depTree = size_tree.dependencySizeTree(bundleStats);
-	size_tree.printDependencySizeTree(depTree);
+function printStats(json: string) {
+	const bundleStats = JSON.parse(json) as webpack_stats.WebpackStats;
+	const depTrees = size_tree.dependencySizeTree(bundleStats);
+	depTrees.forEach(tree => size_tree.printDependencySizeTree(tree));
 }
 
 commander.version('1.1.0')
@@ -30,7 +30,7 @@ if (commander.args[0]) {
 	printStats(fs.readFileSync(commander.args[0]).toString());
 } else if (!process.stdin.isTTY) {
 	let json = '';
-	process.stdin.on('data', chunk => json += chunk.toString());
+	process.stdin.on('data', (chunk: any) => json += chunk.toString());
 	process.stdin.on('end', () => printStats(json));
 } else {
 	console.error('No Webpack JSON output file specified. Use `webpack --json` to generate it.');

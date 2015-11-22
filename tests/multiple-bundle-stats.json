@@ -1,0 +1,218 @@
+{
+  "errors": [],
+  "warnings": [],
+  "version": "1.12.3",
+  "hash": "112f2c73b33a2c1ce462112f2c73b33a2c1ce462",
+  "children": [
+    {
+      "errors": [],
+      "warnings": [],
+      "version": "1.12.3",
+      "hash": "112f2c73b33a2c1ce462",
+      "time": 65,
+      "publicPath": "",
+      "assetsByChunkName": {
+        "main": "main.js"
+      },
+      "assets": [
+        {
+          "name": "main.js",
+          "size": 1422,
+          "chunks": [
+            0
+          ],
+          "chunkNames": [
+            "main"
+          ],
+          "emitted": true
+        }
+      ],
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 34,
+          "names": [
+            "main"
+          ],
+          "files": [
+            "main.js"
+          ],
+          "hash": "7f79e4d68c5a4c18ef05",
+          "parents": [],
+          "modules": [
+            {
+              "id": 0,
+              "identifier": "/tmp/multi-bundle/browser.js",
+              "name": "./browser.js",
+              "index": 0,
+              "index2": 0,
+              "size": 34,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [],
+              "source": "console.log('Multi-bundle test');\n"
+            }
+          ],
+          "filteredModules": 0,
+          "origins": [
+            {
+              "moduleId": 0,
+              "module": "/tmp/multi-bundle/browser.js",
+              "moduleIdentifier": "/tmp/multi-bundle/browser.js",
+              "moduleName": "./browser.js",
+              "loc": "",
+              "name": "main",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/tmp/multi-bundle/browser.js",
+          "name": "./browser.js",
+          "index": 0,
+          "index2": 0,
+          "size": 34,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "source": "console.log('Multi-bundle test');\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "bundle-name"
+    },
+    {
+      "errors": [],
+      "warnings": [],
+      "version": "1.12.3",
+      "hash": "112f2c73b33a2c1ce462",
+      "time": 51,
+      "publicPath": "",
+      "assetsByChunkName": {
+        "main": "main.js"
+      },
+      "assets": [
+        {
+          "name": "main.js",
+          "size": 1422,
+          "chunks": [
+            0
+          ],
+          "chunkNames": [
+            "main"
+          ],
+          "emitted": true
+        }
+      ],
+      "chunks": [
+        {
+          "id": 0,
+          "rendered": true,
+          "initial": true,
+          "entry": true,
+          "extraAsync": false,
+          "size": 34,
+          "names": [
+            "main"
+          ],
+          "files": [
+            "main.js"
+          ],
+          "hash": "7f79e4d68c5a4c18ef05",
+          "parents": [],
+          "modules": [
+            {
+              "id": 0,
+              "identifier": "/tmp/multi-bundle/browser.js",
+              "name": "./browser.js",
+              "index": 0,
+              "index2": 0,
+              "size": 34,
+              "cacheable": true,
+              "built": true,
+              "optional": false,
+              "prefetched": false,
+              "chunks": [
+                0
+              ],
+              "assets": [],
+              "issuer": null,
+              "failed": false,
+              "errors": 0,
+              "warnings": 0,
+              "reasons": [],
+              "source": "console.log('Multi-bundle test');\n"
+            }
+          ],
+          "filteredModules": 0,
+          "origins": [
+            {
+              "moduleId": 0,
+              "module": "/tmp/multi-bundle/browser.js",
+              "moduleIdentifier": "/tmp/multi-bundle/browser.js",
+              "moduleName": "./browser.js",
+              "loc": "",
+              "name": "main",
+              "reasons": []
+            }
+          ]
+        }
+      ],
+      "modules": [
+        {
+          "id": 0,
+          "identifier": "/tmp/multi-bundle/browser.js",
+          "name": "./browser.js",
+          "index": 0,
+          "index2": 0,
+          "size": 34,
+          "cacheable": true,
+          "built": true,
+          "optional": false,
+          "prefetched": false,
+          "chunks": [
+            0
+          ],
+          "assets": [],
+          "issuer": null,
+          "failed": false,
+          "errors": 0,
+          "warnings": 0,
+          "reasons": [],
+          "source": "console.log('Multi-bundle test');\n"
+        }
+      ],
+      "filteredModules": 0,
+      "children": [],
+      "name": "bundle-name"
+    }
+  ]
+}
