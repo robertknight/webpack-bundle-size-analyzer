@@ -27,13 +27,13 @@ describe('printDependencySizeTree()', () => {
 
 		expect(output).to.equal(
 `
-marked: 27.53 kB (14.9%)
-  <self>: 27.53 kB (100%)
-lru-cache: 6.29 kB (3.40%)
-  <self>: 6.29 kB (100%)
-style-loader: 717 B (0.379%)
-  <self>: 717 B (100%)
-<self>: 150.33 kB (81.3%)`
+marked: 28.2 kB (14.9%)
+  <self>: 28.2 kB (100%)
+lru-cache: 6.45 kB (3.40%)
+  <self>: 6.45 kB (100%)
+style-loader: 717 Bytes (0.379%)
+  <self>: 717 Bytes (100%)
+<self>: 154 kB (81.3%)`
 );
 	});
 
@@ -49,7 +49,7 @@ style-loader: 717 B (0.379%)
 		expect(output).to.equal(
 `
 Bundle: a-bundle
-<self>: 123 B (100%)`);
+<self>: 123 Bytes (100%)`);
 	});
 });
 
