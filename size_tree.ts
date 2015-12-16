@@ -1,6 +1,5 @@
 /// <reference path="typings/typings.d.ts" />
 
-import filesize = require('filesize');
 import path = require('path');
 
 import webpack_stats = require('./webpack_stats');
@@ -152,3 +151,8 @@ export function dependencySizeTree(stats: webpack_stats.WebpackStats) {
 	}
 }
 
+function filesize(size: number) {
+	var index = Math.floor(Math.log(Math.abs(size)) / Math.log(1000)) | 0;
+	return +(size / Math.pow(1000, index)).toPrecision(3) + ' '
+		+ (index ? 'kMGT'[--index] + 'B' : 'Bytes');
+}
