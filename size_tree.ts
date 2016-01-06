@@ -67,8 +67,10 @@ export function printDependencySizeTree(node: StatsNode, depth: number = 0,
 		printDependencySizeTree(child, depth + 1, outputFn);
 	}
 
-	const percentage = ((remainder/totalSize) * 100).toPrecision(3);
-	outputFn(`${prefix}<self>: ${filesize(remainder)} (${percentage}%)`);
+	if (depth === 0 || remainder !== totalSize) {
+		const percentage = ((remainder/totalSize) * 100).toPrecision(3);
+		outputFn(`${prefix}<self>: ${filesize(remainder)} (${percentage}%)`);
+	}
 }
 
 function bundleSizeTree(stats: webpack_stats.WebpackCompilation) {
