@@ -7,7 +7,7 @@
     "test": "make test"
   },
   "bin": {
-    "analyze-bundle-size": "./analyze-bundle-size"
+    "webpack-bundle-size-analyzer": "./webpack-bundle-size-analyzer"
   },
   "keywords": [
     "webpack"
