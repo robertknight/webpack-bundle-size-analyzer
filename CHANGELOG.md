@@ -1,3 +1,8 @@
+## 2.0.0
+
+- Renamed the binary to webpack-bundle-size-analyzer
+  to match the package and repository name.
+
 ## 1.3.0
 
 - Simplify output by not printing '<self>' lines

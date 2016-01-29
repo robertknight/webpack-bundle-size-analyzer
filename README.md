@@ -20,7 +20,7 @@ see their [optimization guide](http://webpack.github.io/docs/optimization.html)
 
 ````
 npm install -g webpack-bundle-size-analyzer
-webpack --json | analyze-bundle-size
+webpack --json | webpack-bundle-size-analyzer
 ````
 
 When run on [react-testing](https://github.com/robertknight/react-testing) for example,
@@ -61,7 +61,7 @@ not plugins which operate on the whole generated bundle.
 
 The [recommended approach](http://webpack.github.io/docs/optimization.html)
 to minifying JavaScript in Webpack bundles is to use the UglifyJS plugin,
-which operates on the whole bundle. Consequently the stats shown by analyze-bundle-size
+which operates on the whole bundle. Consequently the stats shown by webpack-bundle-size-analyzer
 will report sizes _before_ minification. This should still give a pretty good idea of what
 contributes to your bundle size but some libraries will compress better than others,
 so they can be misleading.
