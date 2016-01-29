@@ -27,10 +27,10 @@ describe('printDependencySizeTree()', () => {
 
 		expect(output).to.equal(
 `
-marked: 27.53 kB (14.9%)
-lru-cache: 6.29 kB (3.40%)
+marked: 27.53 KB (14.9%)
+lru-cache: 6.29 KB (3.40%)
 style-loader: 717 B (0.379%)
-<self>: 150.33 kB (81.3%)`
+<self>: 150.33 KB (81.3%)`
 );
 	});
 
