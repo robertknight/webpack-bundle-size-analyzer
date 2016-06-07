@@ -54,17 +54,17 @@ export function printDependencySizeTree(node: StatsNode, depth: number = 0,
 	}
 
 	for (const child of childrenBySize) {
-		remainder -= child.size;
-
-		if (remainder < 0.01 * totalSize) {
-			break;
-		}
-
 		++includedCount;
 		const percentage = ((child.size/totalSize) * 100).toPrecision(3);
 		outputFn(`${prefix}${child.packageName}: ${filesize(child.size)} (${percentage}%)`);
 	
 		printDependencySizeTree(child, depth + 1, outputFn);
+
+		remainder -= child.size;
+
+		if (remainder < 0.01 * totalSize) {
+			break;
+		}
 	}
 
 	if (depth === 0 || remainder !== totalSize) {
@@ -90,7 +90,7 @@ function bundleSizeTree(stats: webpack_stats.WebpackCompilation) {
 			path: modulePath(mod.identifier),
 			size: mod.size
 		};
-	}); 
+	});
 	modules.sort((a, b) => {
 		if (a === b) {
 			return 0;
@@ -153,4 +153,3 @@ export function dependencySizeTree(stats: webpack_stats.WebpackStats) {
 		return [bundleSizeTree(stats)];
 	}
 }
-
