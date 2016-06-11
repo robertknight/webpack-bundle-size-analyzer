@@ -1,3 +1,8 @@
+## 2.0.2
+
+- Fixed issue with package sizes not being output if a bundle had
+  very small dependencies (#15).
+
 ## 2.0.0
 
 - Renamed the binary to webpack-bundle-size-analyzer
