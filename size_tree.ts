@@ -107,7 +107,7 @@ function bundleSizeTree(stats: webpack_stats.WebpackCompilation) {
 		let packages = mod.path.split(new RegExp('\\' + path.sep + 'node_modules\\' + path.sep));
 		let filename = '';
 		if (packages.length > 1) {
-			let lastSegment = packages.pop();
+			let lastSegment = packages.pop() as string;
 			let lastPackageName = lastSegment.slice(0, lastSegment.search(new RegExp('\\' + path.sep + '|$')));
 			packages.push(lastPackageName);
 			filename = lastSegment.slice(lastPackageName.length + 1);
