@@ -1,18 +1,19 @@
 NODE_BIN=./node_modules/.bin
+typings_file=typings/index.d.ts
 
-all: build/cli.js
+all: cli
 
-typings_file=typings/DefinitelyTyped/tsd.d.ts
+node_modules: package.json
+	npm install
 
-$(typings_file): tsd.json
-	$(NODE_BIN)/tsd reinstall
-	$(NODE_BIN)/tsd rebundle
+$(typings_file): typings.json node_modules
+	$(NODE_BIN)/typings install
 	touch $(typings_file)
 
-build/cli.js: $(typings_file) $(wildcard *.ts) $(wildcard tests/*.ts)
+cli: $(typings_file)
 	$(NODE_BIN)/tsc
 
-test: build/cli.js
+test: cli
 	$(NODE_BIN)/mocha build/tests/
 
 clean:

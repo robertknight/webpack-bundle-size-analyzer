@@ -1,5 +1,3 @@
-/// <reference path="DefinitelyTyped/tsd.d.ts" />
-
 declare module 'filesize' {
 	interface SizeObject {
 		value: number;

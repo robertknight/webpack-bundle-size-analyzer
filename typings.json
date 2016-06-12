@@ -1,0 +1,10 @@
+{
+  "name": "webpack-bundle-size-analyzer",
+  "dependencies": {},
+  "globalDependencies": {
+    "chai": "registry:dt/chai#3.4.0+20160317120654",
+    "commander": "registry:dt/commander#2.3.0+20160317120654",
+    "mocha": "registry:dt/mocha#2.2.5+20160317120654",
+    "node": "registry:dt/node#6.0.0+20160608110640"
+  }
+}

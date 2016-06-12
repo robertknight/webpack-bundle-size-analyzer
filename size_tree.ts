@@ -1,5 +1,3 @@
-/// <reference path="typings/typings.d.ts" />
-
 import filesize = require('filesize');
 import path = require('path');
 

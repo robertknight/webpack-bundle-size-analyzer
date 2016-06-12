@@ -1,19 +1,13 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "noImplicitAny": true,
-        "outDir": "build",
-        "rootDir": ".",
-        "sourceMap": false
-    },
-	"files": [
-		"cli.ts",
-		"size_tree.ts",
-		"webpack_stats.ts",
-		"tests/size_tree_test.ts"
-	],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "noImplicitAny": true,
+    "outDir": "build",
+    "rootDir": ".",
+    "sourceMap": false
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

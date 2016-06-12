@@ -1,5 +1,3 @@
-/// <reference path="typings/typings.d.ts" />
-
 import commander = require('commander');
 import fs = require('fs');
 

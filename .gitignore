@@ -1,5 +1,6 @@
 *.swp
 
-typings/DefinitelyTyped
+typings/index.d.ts
+typings/globals
 node_modules/
 build/

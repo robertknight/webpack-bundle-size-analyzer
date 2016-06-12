@@ -1,5 +1,3 @@
-/// <reference path="../typings/typings.d.ts" />
-
 import {expect} from 'chai';
 import fs = require('fs');
 import path = require('path');
