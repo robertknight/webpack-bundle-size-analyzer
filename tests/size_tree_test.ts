@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import fs = require('fs');
 import path = require('path');
 
-import size_tree = require('../size_tree');
-import webpack_stats = require('../webpack_stats');
+import size_tree = require('../src/size_tree');
+import webpack_stats = require('../src/webpack_stats');
 
 describe('printDependencySizeTree()', () => {
 	it('should print the size tree', () => {
