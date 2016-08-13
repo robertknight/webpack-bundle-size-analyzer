@@ -1,6 +1,4 @@
 *.swp
 
-typings/index.d.ts
-typings/globals
 node_modules/
 build/

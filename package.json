@@ -1,6 +1,6 @@
 {
   "name": "webpack-bundle-size-analyzer",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "A utility to find how your dependencies are contributing to the size of your Webpack bundles",
   "main": "build/size_tree.js",
   "scripts": {
@@ -29,9 +29,12 @@
     "url": "http://github.com/robertknight/webpack-bundle-size-analyzer.git"
   },
   "devDependencies": {
+    "@types/chai": "^3.4.30",
+    "@types/commander": "^2.3.29",
+    "@types/mocha": "^2.2.29",
+    "@types/node": "^6.0.33",
     "chai": "^2.2.0",
     "mocha": "^2.2.1",
-    "typescript": "^1.9.0-dev.20160612-1.0",
-    "typings": "^1.0.5"
+    "typescript": "^2.0.0"
   }
 }
