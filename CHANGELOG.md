@@ -1,3 +1,8 @@
+## 2.2.0
+
+- Added `--json` command-line argument which outputs the package size
+  tree in JSON format (#20).
+
 ## 2.0.2
 
 - Fixed issue with package sizes not being output if a bundle had
