@@ -13,13 +13,13 @@ function modulePath(identifier: string) {
 /** A node in the package size tree
   */
 export interface StatsNode {
-	/** Name of the package. ie. 'foo' from 'node_modules/foo' */
-	packageName: string;
-	/** Total size of files in this package, including its dependencies,
-	  * in bytes.
-	  */
-	size: number;
-	children: StatsNode[];
+    /** Name of the package. ie. 'foo' from 'node_modules/foo' */
+    packageName: string;
+    /** Total size of files in this package, including its dependencies,
+      * in bytes.
+      */
+    size: number;
+    children: StatsNode[];
 }
 
 export interface RootStatsNode extends StatsNode {

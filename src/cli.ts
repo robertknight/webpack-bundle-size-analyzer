@@ -31,10 +31,10 @@ commander.version('1.1.0')
 commander.parse(process.argv);
 
 
-const opts = {
-	outputAsJson: commander['json'],
-	sharesStat:   commander['sharesStat']
-}
+  const opts = {
+    outputAsJson: commander['json'],
+    sharesStat:   commander['sharesStat']
+  }
 
 if (commander.args[0]) {
 	printStats(fs.readFileSync(commander.args[0]).toString(), opts);
