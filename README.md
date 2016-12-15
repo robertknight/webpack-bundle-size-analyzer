@@ -3,6 +3,22 @@ Fork
 
 Added `--no-shares-stat` option to supprss output like `(15.32%)`. See: https://github.com/robertknight/webpack-bundle-size-analyzer/pull/27
 
+## Instalation
+
+This fork may be installed by npm using `git_npm` branch
+
+```bash
+$ npm install -g x2es/webpack-bundle-size-analyzer#git_npm
+```
+
+Or added to `package.json`
+
+```json
+"devDependencies": {
+  "webpack-bundle-size-analyzer": "x2es/webpack-bundle-size-analyzer#git_npm"
+}
+```
+
 Webpack Bundle Size Analyzer
 ============================
 
