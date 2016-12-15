@@ -5,6 +5,9 @@ import path = require('path');
 import size_tree = require('../src/size_tree');
 import webpack_stats = require('../src/webpack_stats');
 
+const printSharesStat    = true;
+const suppressSharesStat = false;
+
 describe('printDependencySizeTree()', () => {
 	it('should print the size tree', () => {
 		let output = '';
@@ -21,7 +24,7 @@ describe('printDependencySizeTree()', () => {
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).to.equal(1);
-		size_tree.printDependencySizeTree(depsTree[0], 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(depsTree[0], printSharesStat, 0, line => output += '\n' + line);
 
 		expect(output).to.equal(
 `
@@ -29,6 +32,32 @@ marked: 27.53 KB (14.9%)
 lru-cache: 6.29 KB (3.40%)
 style-loader: 717 B (0.379%)
 <self>: 150.33 KB (81.3%)`
+);
+	});
+
+	it('should print the size tree without shares stat', () => {
+		let output = '';
+
+		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
+		const statsJson = <webpack_stats.WebpackCompilation>JSON.parse(statsJsonStr);
+
+		// convert paths in Json to WIN if necessary
+		if(path.sep !== '/') {
+			statsJson.modules.forEach(module => {
+				module.identifier = module.identifier.replace(/\//g, path.sep);
+			});
+		}
+
+		const depsTree = size_tree.dependencySizeTree(statsJson);
+		expect(depsTree.length).to.equal(1);
+		size_tree.printDependencySizeTree(depsTree[0], suppressSharesStat, 0, line => output += '\n' + line);
+
+		expect(output).to.equal(
+`
+marked: 27.53 KB
+lru-cache: 6.29 KB
+style-loader: 717 B
+<self>: 150.33 KB`
 );
 	});
 
@@ -40,11 +69,26 @@ style-loader: 717 B (0.379%)
 			size: 123,
 			children: [],
 		};
-		size_tree.printDependencySizeTree(namedBundle, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(namedBundle, printSharesStat, 0, line => output += '\n' + line);
 		expect(output).to.equal(
 `
 Bundle: a-bundle
 <self>: 123 B (100%)`);
+	});
+
+	it('should print the bundle name without shares stat', () => {
+		let output = '';
+		let namedBundle: size_tree.RootStatsNode = {
+			bundleName: 'a-bundle',
+			packageName: '<self>',
+			size: 123,
+			children: [],
+		};
+		size_tree.printDependencySizeTree(namedBundle, suppressSharesStat, 0, line => output += '\n' + line);
+		expect(output).to.equal(
+`
+Bundle: a-bundle
+<self>: 123 B`);
 	});
 });
 
