@@ -13,13 +13,13 @@ function modulePath(identifier: string) {
 /** A node in the package size tree
   */
 export interface StatsNode {
-	/** Name of the package. ie. 'foo' from 'node_modules/foo' */
-	packageName: string;
-	/** Total size of files in this package, including its dependencies,
-	  * in bytes.
-	  */
-	size: number;
-	children: StatsNode[];
+    /** Name of the package. ie. 'foo' from 'node_modules/foo' */
+    packageName: string;
+    /** Total size of files in this package, including its dependencies,
+      * in bytes.
+      */
+    size: number;
+    children: StatsNode[];
 }
 
 export interface RootStatsNode extends StatsNode {
@@ -30,7 +30,7 @@ export interface RootStatsNode extends StatsNode {
   * size contributed to the bundle by each package's own code plus those
   * of its dependencies.
   */
-export function printDependencySizeTree(node: StatsNode, depth: number = 0,
+export function printDependencySizeTree(node: StatsNode, sharesStat: boolean, depth: number = 0,
   outputFn: (str: string) => void = console.log) {
 
 	if (node.hasOwnProperty('bundleName')) {
@@ -53,10 +53,14 @@ export function printDependencySizeTree(node: StatsNode, depth: number = 0,
 
 	for (const child of childrenBySize) {
 		++includedCount;
-		const percentage = ((child.size/totalSize) * 100).toPrecision(3);
-		outputFn(`${prefix}${child.packageName}: ${filesize(child.size)} (${percentage}%)`);
+		let out = `${prefix}${child.packageName}: ${filesize(child.size)}`;
+		if (sharesStat) {
+			const percentage = ((child.size/totalSize) * 100).toPrecision(3);
+			out = `${out} (${percentage}%)`;
+		}
+		outputFn(out);
 	
-		printDependencySizeTree(child, depth + 1, outputFn);
+		printDependencySizeTree(child, sharesStat, depth + 1, outputFn);
 
 		remainder -= child.size;
 
@@ -66,8 +70,12 @@ export function printDependencySizeTree(node: StatsNode, depth: number = 0,
 	}
 
 	if (depth === 0 || remainder !== totalSize) {
-		const percentage = ((remainder/totalSize) * 100).toPrecision(3);
-		outputFn(`${prefix}<self>: ${filesize(remainder)} (${percentage}%)`);
+		let out = `${prefix}<self>: ${filesize(remainder)}`;
+		if (sharesStat) {
+			const percentage = ((remainder/totalSize) * 100).toPrecision(3);
+			out = `${out} (${percentage}%)`
+		}
+		outputFn(out);
 	}
 }
 
