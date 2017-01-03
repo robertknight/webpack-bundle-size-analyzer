@@ -108,7 +108,14 @@ function bundleSizeTree(stats: webpack_stats.WebpackCompilation) {
 		let filename = '';
 		if (packages.length > 1) {
 			let lastSegment = packages.pop() as string;
-			let lastPackageName = lastSegment.slice(0, lastSegment.search(new RegExp('\\' + path.sep + '|$')));
+			let lastPackageName = '';
+			if(lastSegment[0] === ('@')){
+				// package is a scoped package
+				let offset = lastSegment.indexOf(path.sep) + 1;
+				lastPackageName = lastSegment.slice(0, offset + lastSegment.slice(offset).indexOf(path.sep));
+			} else {
+			 	lastPackageName = lastSegment.slice(0, lastSegment.indexOf(path.sep));
+			}
 			packages.push(lastPackageName);
 			filename = lastSegment.slice(lastPackageName.length + 1);
 		} else {
