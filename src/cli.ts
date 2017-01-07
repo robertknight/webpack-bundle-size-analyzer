@@ -4,19 +4,19 @@ import fs = require('fs');
 import size_tree = require('./size_tree');
 import webpack_stats = require('./webpack_stats');
 
-function printStats(json: string, opts: { outputAsJson: boolean, sharesStat: boolean }) {
+function printStats(json: string, opts: { outputAsJson: boolean, shareStats: boolean }) {
     const bundleStats = JSON.parse(json) as webpack_stats.WebpackStats;
 	const depTrees = size_tree.dependencySizeTree(bundleStats);
     if (opts.outputAsJson) {
         console.log(JSON.stringify(depTrees, undefined, 2));
     } else {
-        depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.sharesStat));
+        depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats));
     }
 }
 
 commander.version('1.1.0')
          .option('-j --json', 'Output as JSON')
-         .option('--no-shares-stat', 'Suppress shares stat from output')
+         .option('--no-share-stats', 'Do not output dependency sizes as a percentage')
          .usage('[options] [Webpack JSON output]')
          .description(
  `Analyzes the JSON output from 'webpack --json'
@@ -33,7 +33,7 @@ commander.parse(process.argv);
 
 const opts = {
 	outputAsJson: commander['json'],
-	sharesStat:   commander['sharesStat']
+	shareStats:   commander['shareStats']
 }
 
 if (commander.args[0]) {

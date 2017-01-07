@@ -5,8 +5,8 @@ import path = require('path');
 import size_tree = require('../src/size_tree');
 import webpack_stats = require('../src/webpack_stats');
 
-const printSharesStat    = true;
-const suppressSharesStat = false;
+const printShareStats    = true;
+const suppressShareStats = false;
 
 describe('printDependencySizeTree()', () => {
 	it('should print the size tree', () => {
@@ -24,7 +24,7 @@ describe('printDependencySizeTree()', () => {
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).to.equal(1);
-		size_tree.printDependencySizeTree(depsTree[0], printSharesStat, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(depsTree[0], printShareStats, 0, line => output += '\n' + line);
 
 		expect(output).to.equal(
 `
@@ -35,7 +35,7 @@ style-loader: 717 B (0.379%)
 );
 	});
 
-	it('should print the size tree without shares stat', () => {
+	it('should print the size tree without share stats', () => {
 		let output = '';
 
 		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
@@ -50,7 +50,7 @@ style-loader: 717 B (0.379%)
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).to.equal(1);
-		size_tree.printDependencySizeTree(depsTree[0], suppressSharesStat, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(depsTree[0], suppressShareStats, 0, line => output += '\n' + line);
 
 		expect(output).to.equal(
 `
@@ -69,14 +69,14 @@ style-loader: 717 B
 			size: 123,
 			children: [],
 		};
-		size_tree.printDependencySizeTree(namedBundle, printSharesStat, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(namedBundle, printShareStats, 0, line => output += '\n' + line);
 		expect(output).to.equal(
 `
 Bundle: a-bundle
 <self>: 123 B (100%)`);
 	});
 
-	it('should print the bundle name without shares stat', () => {
+	it('should print the bundle name without share stats', () => {
 		let output = '';
 		let namedBundle: size_tree.RootStatsNode = {
 			bundleName: 'a-bundle',
@@ -84,7 +84,7 @@ Bundle: a-bundle
 			size: 123,
 			children: [],
 		};
-		size_tree.printDependencySizeTree(namedBundle, suppressSharesStat, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(namedBundle, suppressShareStats, 0, line => output += '\n' + line);
 		expect(output).to.equal(
 `
 Bundle: a-bundle
