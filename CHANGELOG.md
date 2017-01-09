@@ -1,3 +1,8 @@
+## 2.3.0
+
+- Added `--no-share-stats` command-line argument which disables output
+  dependency sizes as a percentage (#27)
+
 ## 2.2.0
 
 - Added `--json` command-line argument which outputs the package size
