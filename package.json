@@ -29,12 +29,12 @@
     "url": "http://github.com/robertknight/webpack-bundle-size-analyzer.git"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.30",
-    "@types/commander": "^2.3.29",
-    "@types/mocha": "^2.2.29",
-    "@types/node": "^6.0.33",
-    "chai": "^2.2.0",
-    "mocha": "^2.2.1",
-    "typescript": "^2.0.0"
+    "@types/chai": "^3.4.34",
+    "@types/commander": "^2.3.31",
+    "@types/mocha": "^2.2.36",
+    "@types/node": "^6.0.58",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "typescript": "^2.1.4"
   }
 }
