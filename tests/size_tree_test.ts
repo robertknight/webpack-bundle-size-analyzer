@@ -130,4 +130,40 @@ describe('dependencySizeTree()', () => {
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).to.equal(2);
 	});
+
+	it('should include the package name of scoped packages', () => {
+		let webpackOutput: webpack_stats.WebpackCompilation = {
+			version: '1.2.3',
+			hash: 'unused',
+			time: 100,
+			assetsByChunkName: {},
+			assets: [],
+			chunks: [],
+			modules: [{
+				id: 0,
+				identifier: path.join('/', 'path', 'to', 'project', 'node_modules', '@scope', 'package1', 'foo.js'),
+				size: 1234,
+				name: path.join('.', 'foo.js')
+			}, {
+				id: 0,
+				identifier: path.join('/', 'path', 'to', 'project', 'node_modules', '@scope', 'package2', 'bar.js'),
+				size: 1234,
+				name: path.join('.', 'bar.js')
+			}],
+			errors: [],
+			warnings: [],
+		};
+		const depsTree = size_tree.dependencySizeTree(webpackOutput);
+		expect(depsTree.length).to.equal(1);
+		expect(depsTree[0].children).to.deep.include({
+			packageName: '@scope/package1',
+			size: 1234,
+			children: []
+		});
+		expect(depsTree[0].children).to.deep.include({
+			packageName: '@scope/package2',
+			size: 1234,
+			children: []
+		});
+	});
 });
