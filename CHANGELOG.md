@@ -1,3 +1,7 @@
+## 2.4.0
+
+- Include package name for scoped packages (#31)
+
 ## 2.3.0
 
 - Added `--no-share-stats` command-line argument which disables output
