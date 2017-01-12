@@ -4,7 +4,10 @@
   "description": "A utility to find how your dependencies are contributing to the size of your Webpack bundles",
   "main": "build/size_tree.js",
   "scripts": {
-    "test": "make test"
+    "postversion": "git push && git push --tags && npm publish",
+    "preversion": "npm test",
+    "test": "make test",
+    "version": "make clean && make"
   },
   "bin": {
     "webpack-bundle-size-analyzer": "./webpack-bundle-size-analyzer"
