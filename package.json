@@ -20,7 +20,7 @@
     "humanize": "0.0.9"
   },
   "files": [
-    "build",
+    "build/src",
     "webpack-bundle-size-analyzer"
   ],
   "homepage": "http://github.com/robertknight/webpack-bundle-size-analyzer",
