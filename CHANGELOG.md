@@ -1,6 +1,7 @@
 ## 2.5.0
 
 - Print a more helpful error if the input is not valid JSON.
+- Fix --version output
 
 ## 2.4.0
 

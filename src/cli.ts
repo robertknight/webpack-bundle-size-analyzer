@@ -31,7 +31,7 @@ The parsing error was:
   }
 }
 
-commander.version('1.1.0')
+commander.version(require('../../package.json').version)
          .option('-j --json', 'Output as JSON')
          .option('--no-share-stats', 'Do not output dependency sizes as a percentage')
          .usage('[options] [Webpack JSON output]')
