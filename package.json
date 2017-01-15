@@ -1,6 +1,6 @@
 {
   "name": "webpack-bundle-size-analyzer",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "A utility to find how your dependencies are contributing to the size of your Webpack bundles",
   "main": "build/size_tree.js",
   "scripts": {
