@@ -5,13 +5,30 @@ import size_tree = require('./size_tree');
 import webpack_stats = require('./webpack_stats');
 
 function printStats(json: string, opts: { outputAsJson: boolean, shareStats: boolean }) {
-    const bundleStats = JSON.parse(json) as webpack_stats.WebpackStats;
-	const depTrees = size_tree.dependencySizeTree(bundleStats);
-    if (opts.outputAsJson) {
-        console.log(JSON.stringify(depTrees, undefined, 2));
-    } else {
-        depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats));
-    }
+  let bundleStats;
+  try {
+    bundleStats = JSON.parse(json) as webpack_stats.WebpackStats;
+  } catch (err) {
+    console.error(`\
+Error: The input is not valid JSON.
+
+Check that:
+ - You passed the '--json' argument to 'webpack'
+ - There is no extra non-JSON content in the output, such as log messages.
+
+The parsing error was:
+
+  ${err}
+`);
+    return;
+  }
+
+  const depTrees = size_tree.dependencySizeTree(bundleStats);
+  if (opts.outputAsJson) {
+      console.log(JSON.stringify(depTrees, undefined, 2));
+  } else {
+      depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats));
+  }
 }
 
 commander.version('1.1.0')
@@ -37,7 +54,11 @@ const opts = {
 }
 
 if (commander.args[0]) {
-	printStats(fs.readFileSync(commander.args[0]).toString(), opts);
+  try {
+    printStats(fs.readFileSync(commander.args[0]).toString(), opts);
+  } catch (err) {
+    process.exit(1);
+  }
 } else if (!process.stdin.isTTY) {
 	let json = '';
 	process.stdin.on('data', (chunk: any) => json += chunk.toString());

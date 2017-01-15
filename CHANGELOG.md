@@ -1,3 +1,7 @@
+## 2.5.0
+
+- Print a more helpful error if the input is not valid JSON.
+
 ## 2.4.0
 
 - Include package name for scoped packages (#31)
