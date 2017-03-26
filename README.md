@@ -61,7 +61,15 @@ q: 58.84 kB (5.07%)
 
 ### Plugin Usage
 
-Install this libarary as a development dependency to your webpack project:
+#### Description
+When using the plugin version of this library, a file will be written to a
+location of your choice (when you run your webpack build).  The file contents
+will be a list of the packages in your bundle (sorted in descending order).
+Each line will contain the name of a package, along with it's file size, and the
+percentage of space it takes up in your bundle.
+
+#### Plugin Installation
+Install this library as a development dependency to your webpack project:
 ```
 npm install --save-dev webpack-bundle-size-analyzer
 ```
@@ -89,6 +97,19 @@ Now in your webpack's plugin section, start using this plugin:
   {...bottomOfConfig}
 }
 ```
+
+#### Example Plugin Output
+
+Using the above plugin configuration, the following file will be written:
+
+`<webpack-output-path>/reports/plain-report.txt`:
+```text
+marked: 27.53 KB (14.9%)
+lru-cache: 6.29 KB (3.40%)
+style-loader: 717 B (0.379%)
+<self>: 150.33 KB (81.3%)
+```
+
 
 ### Important Note About Minified Code
 

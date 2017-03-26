@@ -9,14 +9,13 @@ export class WebpackBundleSizeAnalyzerPlugin {
   statsOptions: object;
   constructor(filepath: string = '', statsOptions: object = {}) {
     this.filepath = filepath;
-    this.statsOptions = statsOptions || {};
+    this.statsOptions = statsOptions;
   }
   apply(compiler: any) {
-    const that = this;
     compiler.plugin('done', (stats: any) => {
-      let filepath = that.filepath;
+      let filepath = this.filepath;
       if (filepath.length > 0) {
-        stats = stats.toJson(that.statsOptions);
+        stats = stats.toJson(this.statsOptions);
         if (!path.isAbsolute(filepath)) {
           filepath = path.resolve(compiler.outputPath, filepath);
         }
@@ -27,9 +26,7 @@ export class WebpackBundleSizeAnalyzerPlugin {
                 output += `${out}\n`;
             });
         });
-        fs.writeFile(filepath, output, 'utf8', () => {
-            console.log(`WebpackBundleSizeAnalyzerPlugin wrote to:\n${filepath}`);
-        });
+        fs.writeFile(filepath, output, 'utf8', () => {});
       }
     });
   }
