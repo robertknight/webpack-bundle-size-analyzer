@@ -1,4 +1,3 @@
-import {expect} from 'chai';
 import fs = require('fs');
 import path = require('path');
 
@@ -23,10 +22,10 @@ describe('printDependencySizeTree()', () => {
 		}
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
-		expect(depsTree.length).to.equal(1);
+		expect(depsTree.length).toEqual(1);
 		size_tree.printDependencySizeTree(depsTree[0], printShareStats, 0, line => output += '\n' + line);
 
-		expect(output).to.equal(
+		expect(output).toEqual(
 `
 marked: 27.53 KB (14.9%)
 lru-cache: 6.29 KB (3.40%)
@@ -49,10 +48,10 @@ style-loader: 717 B (0.379%)
 		}
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
-		expect(depsTree.length).to.equal(1);
+		expect(depsTree.length).toEqual(1);
 		size_tree.printDependencySizeTree(depsTree[0], suppressShareStats, 0, line => output += '\n' + line);
 
-		expect(output).to.equal(
+		expect(output).toEqual(
 `
 marked: 27.53 KB
 lru-cache: 6.29 KB
@@ -70,7 +69,7 @@ style-loader: 717 B
 			children: [],
 		};
 		size_tree.printDependencySizeTree(namedBundle, printShareStats, 0, line => output += '\n' + line);
-		expect(output).to.equal(
+		expect(output).toEqual(
 `
 Bundle: a-bundle
 <self>: 123 B (100%)`);
@@ -85,7 +84,7 @@ Bundle: a-bundle
 			children: [],
 		};
 		size_tree.printDependencySizeTree(namedBundle, suppressShareStats, 0, line => output += '\n' + line);
-		expect(output).to.equal(
+		expect(output).toEqual(
 `
 Bundle: a-bundle
 <self>: 123 B`);
@@ -111,8 +110,8 @@ describe('dependencySizeTree()', () => {
 			warnings: [],
 		};
 		const depsTree = size_tree.dependencySizeTree(webpackOutput);
-		expect(depsTree.length).to.equal(1);
-		expect(depsTree[0]).to.deep.equal({
+		expect(depsTree.length).toEqual(1);
+		expect(depsTree[0]).toEqual({
 			packageName: '<root>',
 			size: 1234,
 			children: [{
@@ -128,7 +127,7 @@ describe('dependencySizeTree()', () => {
 		  'multiple-bundle-stats.json')).toString();
 		const statsJson = JSON.parse(statsJsonStr) as webpack_stats.WebpackStats;
 		const depsTree = size_tree.dependencySizeTree(statsJson);
-		expect(depsTree.length).to.equal(2);
+		expect(depsTree.length).toEqual(2);
 	});
 
 	it('should include the package name of scoped packages', () => {
@@ -154,13 +153,13 @@ describe('dependencySizeTree()', () => {
 			warnings: [],
 		};
 		const depsTree = size_tree.dependencySizeTree(webpackOutput);
-		expect(depsTree.length).to.equal(1);
-		expect(depsTree[0].children).to.deep.include({
+		expect(depsTree.length).toEqual(1);
+		expect(depsTree[0].children).toContainEqual({
 			packageName: '@scope/package1',
 			size: 1234,
 			children: []
 		});
-		expect(depsTree[0].children).to.deep.include({
+		expect(depsTree[0].children).toContainEqual({
 			packageName: '@scope/package2',
 			size: 1234,
 			children: []

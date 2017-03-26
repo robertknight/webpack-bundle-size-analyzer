@@ -9,7 +9,7 @@ cli: node_modules
 	$(NODE_BIN)/tsc
 
 test: cli
-	$(NODE_BIN)/mocha build/tests/
+	$(NODE_BIN)/jest build/tests/
 
 clean:
 	rm -rf build
