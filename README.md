@@ -18,10 +18,16 @@ see their [optimization guide](http://webpack.github.io/docs/optimization.html)
 
 ## Usage
 
-````
+There are 2 ways to use this tool:
+
+1. As a command line application
+2. As a webpack plugin
+
+### CLI Usage
+```
 npm install -g webpack-bundle-size-analyzer
 webpack --json | webpack-bundle-size-analyzer
-````
+```
 
 When run on [react-testing](https://github.com/robertknight/react-testing) for example,
 it produces this output, where `<self>` refers to the size of the bundle's own code.
@@ -52,6 +58,37 @@ q: 58.84 kB (5.07%)
 ...
 <self>: 195.57 kB (16.9%)
 ````
+
+### Plugin Usage
+
+Install this libarary as a development dependency to your webpack project:
+```
+npm install --save-dev webpack-bundle-size-analyzer
+```
+
+Import your plugin at the top of your `webpack.config.js` file:
+
+Old School:
+```
+var WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
+```
+
+New School:
+```
+import { WebpackBundleSizeAnalyzerPlugin } from 'webpack-bundle-size-analyzer';
+```
+
+Now in your webpack's plugin section, start using this plugin:
+
+```
+{
+  {...topOfConfig}
+  plugins: [
+    new WebpackBundleSizeAnalyzerPlugin('./reports/plain-report.txt')
+  ]
+  {...bottomOfConfig}
+}
+```
 
 ### Important Note About Minified Code
 
