@@ -11,7 +11,7 @@ describe('printDependencySizeTree()', () => {
 	it('should print the size tree', () => {
 		let output = '';
 
-		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
+		const statsJsonStr = fs.readFileSync(path.join('tests', 'fixtures/stats.json')).toString();
 		const statsJson = <webpack_stats.WebpackCompilation>JSON.parse(statsJsonStr);
 
 		// convert paths in Json to WIN if necessary
@@ -37,7 +37,7 @@ style-loader: 717 B (0.379%)
 	it('should print the size tree without share stats', () => {
 		let output = '';
 
-		const statsJsonStr = fs.readFileSync(path.join('tests', 'stats.json')).toString();
+		const statsJsonStr = fs.readFileSync(path.join('tests', 'fixtures/stats.json')).toString();
 		const statsJson = <webpack_stats.WebpackCompilation>JSON.parse(statsJsonStr);
 
 		// convert paths in Json to WIN if necessary
@@ -124,7 +124,7 @@ describe('dependencySizeTree()', () => {
 
 	it('should return a tree for each bundle in the config', () => {
 		const statsJsonStr = fs.readFileSync(path.join('tests',
-		  'multiple-bundle-stats.json')).toString();
+		  'fixtures/multiple-bundle-stats.json')).toString();
 		const statsJson = JSON.parse(statsJsonStr) as webpack_stats.WebpackStats;
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).toEqual(2);

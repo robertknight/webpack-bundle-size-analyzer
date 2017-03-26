@@ -7,15 +7,18 @@ import sizeTree = require('./size_tree');
 export class WebpackBundleSizeAnalyzerPlugin {
   filepath: string;
   statsOptions: object;
-  constructor(filepath: string, statsOptions: object = {}) {
+  constructor(filepath: string = '', statsOptions: object = {}) {
     this.filepath = filepath;
     this.statsOptions = statsOptions || {};
   }
   apply(compiler: any) {
+    const that = this;
     compiler.plugin('done', (stats: any) => {
-        stats = stats.toJson(this.statsOptions);
-        if (!path.isAbsolute(this.filepath)) {
-          this.filepath = path.resolve(compiler.outputPath, this.filepath);
+      let filepath = that.filepath;
+      if (filepath.length > 0) {
+        stats = stats.toJson(that.statsOptions);
+        if (!path.isAbsolute(filepath)) {
+          filepath = path.resolve(compiler.outputPath, filepath);
         }
         const depTrees = sizeTree.dependencySizeTree(stats);
         let output = '';
@@ -24,9 +27,10 @@ export class WebpackBundleSizeAnalyzerPlugin {
                 output += `${out}\n`;
             });
         });
-        fs.writeFile(this.filepath, output, 'utf-8', () => {
-            console.log(`WebpackBundleSizeAnalyzerPlugin wrote to:\n${this.filepath}`);
+        fs.writeFile(filepath, output, 'utf8', () => {
+            console.log(`WebpackBundleSizeAnalyzerPlugin wrote to:\n${filepath}`);
         });
+      }
     });
   }
 }
