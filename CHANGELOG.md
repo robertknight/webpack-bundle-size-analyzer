@@ -1,3 +1,7 @@
+## 2.6.0
+
+- Enable the tool to be used as a Webpack plugin.
+
 ## 2.5.0
 
 - Print a more helpful error if the input is not valid JSON.
