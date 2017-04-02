@@ -2,10 +2,11 @@
   "name": "webpack-bundle-size-analyzer",
   "version": "2.5.0",
   "description": "A utility to find how your dependencies are contributing to the size of your Webpack bundles",
-  "main": "build/size_tree.js",
+  "main": "build/src/index.js",
   "scripts": {
     "postversion": "git push && git push --tags && npm publish",
     "preversion": "npm test",
+    "coverage": "jest --coverage --no-cache",
     "test": "make test",
     "version": "make clean && make"
   },
@@ -32,12 +33,28 @@
     "url": "http://github.com/robertknight/webpack-bundle-size-analyzer.git"
   },
   "devDependencies": {
-    "@types/chai": "^3.4.34",
     "@types/commander": "^2.3.31",
-    "@types/mocha": "^2.2.36",
+    "@types/jest": "^19.2.2",
     "@types/node": "^6.0.58",
-    "chai": "^3.5.0",
-    "mocha": "^3.2.0",
+    "jest": "^19.0.2",
+    "ts-jest": "^19.0.5",
     "typescript": "^2.1.4"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text-summary",
+      "html",
+      "lcovonly"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
+    "testRegex": "/tests/.*\\.(ts|tsx|js)$"
   }
 }
