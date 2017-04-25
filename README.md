@@ -32,7 +32,7 @@ webpack --json | webpack-bundle-size-analyzer
 When run on [react-testing](https://github.com/robertknight/react-testing) for example,
 it produces this output, where `<self>` refers to the size of the bundle's own code.
 
-````sh
+````
 react: 641.95 kB (55.3%)
   <self>: 641.95 kB (100%)
 chai: 125.8 kB (10.8%)
