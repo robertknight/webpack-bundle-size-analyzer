@@ -24,7 +24,7 @@ There are 2 ways to use this tool:
 2. As a webpack plugin
 
 ### CLI Usage
-```
+```sh
 npm install -g webpack-bundle-size-analyzer
 webpack --json | webpack-bundle-size-analyzer
 ```
@@ -70,25 +70,25 @@ percentage of space it takes up in your bundle.
 
 #### Plugin Installation
 Install this library as a development dependency to your webpack project:
-```
+```sh
 npm install --save-dev webpack-bundle-size-analyzer
 ```
 
 Import your plugin at the top of your `webpack.config.js` file:
 
 Old School:
-```
+```js
 var WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 ```
 
 New School:
-```
+```js
 import { WebpackBundleSizeAnalyzerPlugin } from 'webpack-bundle-size-analyzer';
 ```
 
 Now in your webpack's plugin section, start using this plugin:
 
-```
+```js
 {
   {...topOfConfig}
   plugins: [
