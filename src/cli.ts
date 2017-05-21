@@ -30,7 +30,7 @@ The parsing error was:
       depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats));
       console.log(
         'Note: the file sizes are calculated before minification, ' +
-	'and might not reflect the real file sizes in the production bundle.'
+        'and might not reflect the real file sizes in the production bundle.'
       );
   }
 }
