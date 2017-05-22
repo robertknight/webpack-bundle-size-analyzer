@@ -1,3 +1,8 @@
+## 2.7.0
+
+- Add note to text output about file sizes not taking into account minification
+  (#41).
+
 ## 2.6.0
 
 - Enable the tool to be used as a Webpack plugin.
