@@ -25,6 +25,7 @@ There are 2 ways to use this tool:
 
 ### CLI Usage
 ```sh
+npm install -g webpack webpack-cli
 npm install -g webpack-bundle-size-analyzer
 webpack --json | webpack-bundle-size-analyzer
 ```
