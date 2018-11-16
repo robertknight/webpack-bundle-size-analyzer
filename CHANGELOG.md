@@ -1,3 +1,9 @@
+## 3.0.0
+
+- Use the recommended Webpack v4+ APIs for hooking into Webpack's compilation
+  process. The plugin now requires Webpack v4+. The CLI utility should still
+  work with earlier versions (#47).
+
 ## 2.7.0
 
 - Add note to text output about file sizes not taking into account minification
