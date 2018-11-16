@@ -19,8 +19,8 @@
   "author": "Robert Knight <robertknight@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "commander": "^2.7.1",
-    "filesize": "^3.1.2",
+    "commander": "^2.19.0",
+    "filesize": "^3.6.1",
     "humanize": "0.0.9"
   },
   "files": [
@@ -33,12 +33,12 @@
     "url": "http://github.com/robertknight/webpack-bundle-size-analyzer.git"
   },
   "devDependencies": {
-    "@types/commander": "^2.3.31",
-    "@types/jest": "^19.2.2",
-    "@types/node": "^6.0.58",
+    "@types/commander": "^2.12.2",
+    "@types/jest": "^19.2.4",
+    "@types/node": "^6.14.2",
     "jest": "^23.6.0",
-    "ts-jest": "^19.0.5",
-    "typescript": "^2.1.4"
+    "ts-jest": "^19.0.14",
+    "typescript": "^2.9.2"
   },
   "jest": {
     "coverageReporters": [
