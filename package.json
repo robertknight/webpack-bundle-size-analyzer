@@ -36,7 +36,7 @@
     "@types/commander": "^2.3.31",
     "@types/jest": "^19.2.2",
     "@types/node": "^6.0.58",
-    "jest": "^19.0.2",
+    "jest": "^23.6.0",
     "ts-jest": "^19.0.5",
     "typescript": "^2.1.4"
   },
