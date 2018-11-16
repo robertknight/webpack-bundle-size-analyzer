@@ -33,13 +33,13 @@ describe('WebpackBundleSizeAnalyzerPlugin', () => {
 	afterEach(() => {
 		fs.writeFile = originalWriteFile;
 	});
-	it('should work when no values passed in', () => {
+	it('should not generate a report when no file path is provided', () => {
 		const plugin = new lib.WebpackBundleSizeAnalyzerPlugin();
 		expect(plugin).toMatchSnapshot();
 		plugin.apply(compilerMock);
 		expect(fsMock.mock.calls).toHaveLength(0);
 	});
-	it('should work when only a filepath is passed in', () => {
+	it('should generate a report when a relative file path is provided', () => {
 		const plugin = new lib.WebpackBundleSizeAnalyzerPlugin('./report.txt');
 		expect(plugin).toMatchSnapshot();
 		plugin.apply(compilerMock);
@@ -49,7 +49,7 @@ describe('WebpackBundleSizeAnalyzerPlugin', () => {
 		expect(fsMock.mock.calls[0][2]).toEqual('utf8');
 		expect(fsMock.mock.calls[0][3]).toBeInstanceOf(Function);
 	});
-	it('should work when an absolute filepath is passed in', () => {
+	it('should generate a report when an absolute file path is provided', () => {
 		const plugin = new lib.WebpackBundleSizeAnalyzerPlugin('/absolute/report.txt');
 		expect(plugin).toMatchSnapshot();
 		plugin.apply(compilerMock);
@@ -60,7 +60,7 @@ describe('WebpackBundleSizeAnalyzerPlugin', () => {
 		expect(fsMock.mock.calls[0][2]).toEqual('utf8');
 		expect(fsMock.mock.calls[0][3]).toBeInstanceOf(Function);
 	});
-	it('should work when both args are passed in', () => {
+	it('supports providing options for `Stats.toJson`', () => {
 		const plugin = new lib.WebpackBundleSizeAnalyzerPlugin('./report.txt', {
 			warnings: false
 		});

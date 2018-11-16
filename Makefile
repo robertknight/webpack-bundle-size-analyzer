@@ -8,8 +8,8 @@ node_modules: package.json
 cli: node_modules
 	$(NODE_BIN)/tsc
 
-test: cli
-	$(NODE_BIN)/jest build/tests/
+test:
+	$(NODE_BIN)/jest
 
 clean:
 	rm -rf build
