@@ -17,9 +17,13 @@ describe('WebpackBundleSizeAnalyzerPlugin', () => {
 		fs.writeFile = fsMock;
 		compilerMock = {
 			outputPath: './mock-path',
-			plugin: (event: any, callback: any) => {
-				expect(event).toEqual('done');
-				callback(statsMock);
+			hooks: {
+				done: {
+					tap: (pluginTitle: any, callback: any) => {
+						expect(pluginTitle).toEqual('WebpackBundleSizeAnalyzerPlugin');
+						callback(statsMock);
+					}
+				}
 			}
 		};
 		statsMock = {

@@ -12,7 +12,7 @@ export class WebpackBundleSizeAnalyzerPlugin {
     this.statsOptions = statsOptions;
   }
   apply(compiler: any) {
-    compiler.plugin('done', (stats: any) => {
+    compiler.hooks.done.tap('WebpackBundleSizeAnalyzerPlugin', (stats: any) => {
       let filepath = this.filepath;
       if (filepath.length > 0) {
         stats = stats.toJson(this.statsOptions);
