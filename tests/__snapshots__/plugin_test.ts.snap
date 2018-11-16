@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WebpackBundleSizeAnalyzerPlugin should work when an absolute filepath is passed in 1`] = `
+exports[`WebpackBundleSizeAnalyzerPlugin should generate a report when a relative file path is provided 1`] = `
+WebpackBundleSizeAnalyzerPlugin {
+  "filepath": "./report.txt",
+  "statsOptions": Object {},
+}
+`;
+
+exports[`WebpackBundleSizeAnalyzerPlugin should generate a report when an absolute file path is provided 1`] = `
 WebpackBundleSizeAnalyzerPlugin {
   "filepath": "/absolute/report.txt",
   "statsOptions": Object {},
 }
 `;
 
-exports[`WebpackBundleSizeAnalyzerPlugin should work when both args are passed in 1`] = `
-WebpackBundleSizeAnalyzerPlugin {
-  "filepath": "./report.txt",
-  "statsOptions": Object {
-    "warnings": false,
-  },
-}
-`;
-
-exports[`WebpackBundleSizeAnalyzerPlugin should work when no values passed in 1`] = `
+exports[`WebpackBundleSizeAnalyzerPlugin should not generate a report when no file path is provided 1`] = `
 WebpackBundleSizeAnalyzerPlugin {
   "filepath": "",
   "statsOptions": Object {},
 }
 `;
 
-exports[`WebpackBundleSizeAnalyzerPlugin should work when only a filepath is passed in 1`] = `
+exports[`WebpackBundleSizeAnalyzerPlugin supports providing options for \`Stats.toJson\` 1`] = `
 WebpackBundleSizeAnalyzerPlugin {
   "filepath": "./report.txt",
-  "statsOptions": Object {},
+  "statsOptions": Object {
+    "warnings": false,
+  },
 }
 `;

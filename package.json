@@ -55,6 +55,6 @@
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     },
     "testResultsProcessor": "<rootDir>/node_modules/ts-jest/coverageprocessor.js",
-    "testRegex": "/tests/.*\\.(ts|tsx|js)$"
+    "testRegex": "./tests/.*.ts$"
   }
 }
