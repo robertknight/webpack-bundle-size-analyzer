@@ -24,10 +24,16 @@ There are 2 ways to use this tool:
 2. As a webpack plugin
 
 ### CLI Usage
+
+Assuming you have the webpack CLI command [installed locally in your project](https://webpack.js.org/guides/installation#local-installation):
+
 ```sh
 npm install -g webpack-bundle-size-analyzer
-webpack --json | webpack-bundle-size-analyzer
+node_modules/.bin/webpack --json | webpack-bundle-size-analyzer
 ```
+
+If you have webpack [installed globally](https://webpack.js.org/guides/installation#global-installation)
+then the first part of this command will be just `webpack --json` instead.
 
 When run on [react-testing](https://github.com/robertknight/react-testing) for example,
 it produces this output, where `<self>` refers to the size of the bundle's own code.
