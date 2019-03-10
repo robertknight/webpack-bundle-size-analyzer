@@ -30,8 +30,8 @@ export interface RootStatsNode extends StatsNode {
   * size contributed to the bundle by each package's own code plus those
   * of its dependencies.
   */
-export function printDependencySizeTree(node: StatsNode, shareStats: boolean, depth: number = 0,
-  outputFn: (str: string) => void = console.log) {
+export function printDependencySizeTree(node: StatsNode, shareStats: boolean, bytes: boolean,
+  depth: number = 0, outputFn: (str: string) => void = console.log) {
 
 	if (node.hasOwnProperty('bundleName')) {
 		let rootNode = node as RootStatsNode;
@@ -53,14 +53,14 @@ export function printDependencySizeTree(node: StatsNode, shareStats: boolean, de
 
 	for (const child of childrenBySize) {
 		++includedCount;
-		let out = `${prefix}${child.packageName}: ${filesize(child.size)}`;
+		let out = `${prefix}${child.packageName}: ${bytes ? child.size : filesize(child.size)}`;
 		if (shareStats) {
 			const percentage = ((child.size/totalSize) * 100).toPrecision(3);
 			out = `${out} (${percentage}%)`;
 		}
 		outputFn(out);
 	
-		printDependencySizeTree(child, shareStats, depth + 1, outputFn);
+		printDependencySizeTree(child, shareStats, bytes, depth + 1, outputFn);
 
 		remainder -= child.size;
 
@@ -70,7 +70,7 @@ export function printDependencySizeTree(node: StatsNode, shareStats: boolean, de
 	}
 
 	if (depth === 0 || remainder !== totalSize) {
-		let out = `${prefix}<self>: ${filesize(remainder)}`;
+		let out = `${prefix}<self>: ${bytes ? remainder : filesize(remainder)}`;
 		if (shareStats) {
 			const percentage = ((remainder/totalSize) * 100).toPrecision(3);
 			out = `${out} (${percentage}%)`

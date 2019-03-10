@@ -23,7 +23,7 @@ describe('printDependencySizeTree()', () => {
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).toEqual(1);
-		size_tree.printDependencySizeTree(depsTree[0], printShareStats, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(depsTree[0], printShareStats, false, 0, line => output += '\n' + line);
 
 		expect(output).toEqual(
 `
@@ -49,14 +49,14 @@ style-loader: 717 B (0.379%)
 
 		const depsTree = size_tree.dependencySizeTree(statsJson);
 		expect(depsTree.length).toEqual(1);
-		size_tree.printDependencySizeTree(depsTree[0], suppressShareStats, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(depsTree[0], suppressShareStats, true, 0, line => output += '\n' + line);
 
 		expect(output).toEqual(
 `
-marked: 27.53 KB
-lru-cache: 6.29 KB
-style-loader: 717 B
-<self>: 150.33 KB`
+marked: 28192
+lru-cache: 6445
+style-loader: 717
+<self>: 153940`
 );
 	});
 
@@ -68,7 +68,7 @@ style-loader: 717 B
 			size: 123,
 			children: [],
 		};
-		size_tree.printDependencySizeTree(namedBundle, printShareStats, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(namedBundle, printShareStats, false, 0, line => output += '\n' + line);
 		expect(output).toEqual(
 `
 Bundle: a-bundle
@@ -83,7 +83,7 @@ Bundle: a-bundle
 			size: 123,
 			children: [],
 		};
-		size_tree.printDependencySizeTree(namedBundle, suppressShareStats, 0, line => output += '\n' + line);
+		size_tree.printDependencySizeTree(namedBundle, suppressShareStats, false, 0, line => output += '\n' + line);
 		expect(output).toEqual(
 `
 Bundle: a-bundle

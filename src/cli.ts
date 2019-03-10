@@ -4,7 +4,7 @@ import fs = require('fs');
 import size_tree = require('./size_tree');
 import webpack_stats = require('./webpack_stats');
 
-function printStats(json: string, opts: { outputAsJson: boolean, shareStats: boolean }) {
+function printStats(json: string, opts: { outputAsJson: boolean, shareStats: boolean, bytes: boolean }) {
   let bundleStats;
   try {
     bundleStats = JSON.parse(json) as webpack_stats.WebpackStats;
@@ -27,7 +27,7 @@ The parsing error was:
   if (opts.outputAsJson) {
       console.log(JSON.stringify(depTrees, undefined, 2));
   } else {
-      depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats));
+      depTrees.forEach(tree => size_tree.printDependencySizeTree(tree, opts.shareStats, opts.bytes));
       console.log(
         '\nNote: The file sizes are calculated before minification, ' +
         'and might not reflect the real file sizes in the production bundle.'
@@ -38,6 +38,7 @@ The parsing error was:
 commander.version(require('../../package.json').version)
          .option('-j --json', 'Output as JSON')
          .option('--no-share-stats', 'Do not output dependency sizes as a percentage')
+         .option('-b --bytes', 'Size in output as bytes, not the default human readable.')
          .usage('[options] [Webpack JSON output]')
          .description(
  `Analyzes the JSON output from 'webpack --json'
@@ -54,7 +55,8 @@ commander.parse(process.argv);
 
 const opts = {
 	outputAsJson: commander['json'],
-	shareStats:   commander['shareStats']
+	shareStats:   commander['shareStats'],
+	bytes:        commander['bytes']
 }
 
 if (commander.args[0]) {

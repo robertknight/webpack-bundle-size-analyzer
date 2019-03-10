@@ -22,7 +22,7 @@ export class WebpackBundleSizeAnalyzerPlugin {
         const depTrees = sizeTree.dependencySizeTree(stats);
         let output = '';
         depTrees.forEach(tree => {
-            return sizeTree.printDependencySizeTree(tree, true, 0, (out) => {
+            return sizeTree.printDependencySizeTree(tree, true, false, 0, (out) => {
                 output += `${out}\n`;
             });
         });
