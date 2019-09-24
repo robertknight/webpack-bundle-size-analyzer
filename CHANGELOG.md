@@ -1,3 +1,7 @@
+## 3.1.0
+
+- Include TypeScript types in the package ([#53](https://github.com/robertknight/webpack-bundle-size-analyzer/pull/53))
+
 ## 3.0.0
 
 - Use the recommended Webpack v4+ APIs for hooking into Webpack's compilation
