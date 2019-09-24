@@ -1,6 +1,6 @@
 {
   "name": "webpack-bundle-size-analyzer",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "A utility to find how your dependencies are contributing to the size of your Webpack bundles",
   "main": "build/src/index.js",
   "scripts": {
