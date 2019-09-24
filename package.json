@@ -33,9 +33,8 @@
     "url": "http://github.com/robertknight/webpack-bundle-size-analyzer.git"
   },
   "devDependencies": {
-    "@types/commander": "^2.12.2",
-    "@types/jest": "^19.2.4",
-    "@types/node": "^6.14.2",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
     "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.6.3"

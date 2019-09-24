@@ -14,7 +14,7 @@ describe('WebpackBundleSizeAnalyzerPlugin', () => {
 	beforeEach(() => {
 		originalWriteFile = fs.writeFile;
 		fsMock = jest.fn();
-		fs.writeFile = fsMock;
+		fs.writeFile = fsMock as any;
 		compilerMock = {
 			outputPath: './mock-path',
 			hooks: {
